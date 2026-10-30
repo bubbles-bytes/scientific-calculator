@@ -1,0 +1,4 @@
+calc
+tests/test_calc
+*.o
+.DS_Store

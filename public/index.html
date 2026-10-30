@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scientific Calculator</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="calc" aria-label="Scientific calculator">
+      <header class="topbar">
+        <span class="brand">Scientific Calculator</span>
+        <span id="status" class="status">connecting…</span>
+      </header>
+
+      <div class="display" id="display">
+        <div class="indicators" aria-hidden="true">
+          <span id="ind-angle" class="on">DEG</span>
+          <span id="ind-2nd">2nd</span>
+          <span id="ind-hyp">HYP</span>
+          <span id="ind-mem">M</span>
+        </div>
+        <div id="previous" class="previous"></div>
+        <input id="expr" class="expr" type="text" autocomplete="off" autocapitalize="off"
+               spellcheck="false" aria-label="Expression" placeholder="0">
+        <div id="preview" class="preview" aria-live="polite"></div>
+      </div>
+
+      <div class="keys">
+        <div class="pad sci">
+          <button type="button" class="key toggle" data-action="second" title="Inverse trig functions">2nd</button>
+          <button type="button" class="key toggle" data-action="hyp" title="Hyperbolic functions">hyp</button>
+          <button type="button" class="key toggle on" data-action="angle" id="angle-key" title="Angle unit: DEG / RAD / GRAD">DEG</button>
+          <button type="button" class="key fn" data-insert="(">(</button>
+          <button type="button" class="key fn" data-insert=")">)</button>
+
+          <button type="button" class="key fn" data-trig="sin">sin</button>
+          <button type="button" class="key fn" data-trig="cos">cos</button>
+          <button type="button" class="key fn" data-trig="tan">tan</button>
+          <button type="button" class="key fn" data-insert="π" title="Pi">π</button>
+          <button type="button" class="key fn" data-insert="e" title="Euler's number">e</button>
+
+          <button type="button" class="key fn" data-insert="^2">x²</button>
+          <button type="button" class="key fn" data-insert="^">xʸ</button>
+          <button type="button" class="key fn" data-insert="exp(">eˣ</button>
+          <button type="button" class="key fn" data-insert="10^">10ˣ</button>
+          <button type="button" class="key fn" data-insert="^(−1)">1/x</button>
+
+          <button type="button" class="key fn" data-insert="√(">√x</button>
+          <button type="button" class="key fn" data-insert="root(" title="root(x, n): n-th root of x">ʸ√x</button>
+          <button type="button" class="key fn" data-insert="ln(">ln</button>
+          <button type="button" class="key fn" data-insert="log(" title="log(x) is base 10, log(x, b) is base b">log</button>
+          <button type="button" class="key fn" data-insert="abs(">|x|</button>
+
+          <button type="button" class="key fn" data-insert="!">n!</button>
+          <button type="button" class="key fn" data-insert="nCr(" title="nCr(n, r): combinations">nCr</button>
+          <button type="button" class="key fn" data-insert="nPr(" title="nPr(n, r): permutations">nPr</button>
+          <button type="button" class="key fn" data-insert=" mod ">mod</button>
+          <button type="button" class="key fn" data-insert="E" title="×10ⁿ (scientific notation)">EXP</button>
+
+          <button type="button" class="key fn" data-insert="mean(" title="mean(a, b, …)">x̄</button>
+          <button type="button" class="key fn" data-insert="stdev(" title="Sample standard deviation: stdev(a, b, …)">σ</button>
+          <button type="button" class="key fn" data-insert=", " title="Argument separator">,</button>
+          <button type="button" class="key fn" data-insert="°" title="Degrees, in any angle mode">°</button>
+          <button type="button" class="key fn" data-insert="ans" title="Previous result">Ans</button>
+        </div>
+
+        <div class="pad num">
+          <button type="button" class="key mem" data-action="mc" title="Memory clear">MC</button>
+          <button type="button" class="key mem" data-action="mr" title="Memory recall">MR</button>
+          <button type="button" class="key mem" data-action="mplus" title="Add to memory">M+</button>
+          <button type="button" class="key mem" data-action="mminus" title="Subtract from memory">M−</button>
+
+          <button type="button" class="key danger" data-action="clear" title="Clear (Esc)">AC</button>
+          <button type="button" class="key ctrl" data-action="back" aria-label="Backspace">⌫</button>
+          <button type="button" class="key ctrl" data-insert="%">%</button>
+          <button type="button" class="key op" data-insert="÷">÷</button>
+
+          <button type="button" class="key digit" data-insert="7">7</button>
+          <button type="button" class="key digit" data-insert="8">8</button>
+          <button type="button" class="key digit" data-insert="9">9</button>
+          <button type="button" class="key op" data-insert="×">×</button>
+
+          <button type="button" class="key digit" data-insert="4">4</button>
+          <button type="button" class="key digit" data-insert="5">5</button>
+          <button type="button" class="key digit" data-insert="6">6</button>
+          <button type="button" class="key op" data-insert="−">−</button>
+
+          <button type="button" class="key digit" data-insert="1">1</button>
+          <button type="button" class="key digit" data-insert="2">2</button>
+          <button type="button" class="key digit" data-insert="3">3</button>
+          <button type="button" class="key op" data-insert="+">+</button>
+
+          <button type="button" class="key digit" data-action="negate" title="Negate">±</button>
+          <button type="button" class="key digit" data-insert="0">0</button>
+          <button type="button" class="key digit" data-insert=".">.</button>
+          <button type="button" class="key eq" data-action="equals" title="Evaluate (Enter)">=</button>
+        </div>
+      </div>
+
+      <p class="hint">
+        Type freely with your keyboard. Also available: asin acos atan atan2 sinh cosh tanh sec csc cot
+        log2 cbrt floor ceil round trunc gcd lcm min max sum median var gamma hypot rand phi tau
+      </p>
+    </section>
+
+    <aside class="history" aria-label="History">
+      <header>
+        <h2>History</h2>
+        <button type="button" id="clear-history" class="link">Clear</button>
+      </header>
+      <p id="history-empty" class="empty">No calculations yet.</p>
+      <ol id="history-list"></ol>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
